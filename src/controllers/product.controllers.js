@@ -50,7 +50,7 @@ router.get("/", (req, res) => {
         return res.status(200).send({ product, redis: true });
       } else {
         try {
-          const product = await Product.findById(req.params.id).lean().exec();
+          const product = await Product.find().lean().exec();
 
           client.setex("redis_key", 100, JSON.stringify(product));
 
